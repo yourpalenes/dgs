@@ -4,6 +4,7 @@
 	<file src="meta.xml" />
 
 	<file src="html/main.css" />
+	<file src="html/mtaevents.js" />
 	<file src="html/main.js" />
 	<file src="html/main.html" />
 	<file src="styleManager/styleMapper.lua"/>
@@ -44,6 +45,7 @@
 	<script src="Core/switchbutton.lua" type="client" />
 	<script src="Core/window.lua" type="client" />
 	<script src="Core/external.lua" type="client" />
+	<script src="Core/viewer.lua" type="client" />
 	
 	<script src="dgsExportedFunction.lua" type="client" />
 	<script src="functions.lua" type="client" />

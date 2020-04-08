@@ -15,6 +15,20 @@ function editTest()
 	end
 end
 
+------------Viewer Test
+function createViewer()
+	dgsSetViewerTarget(true,
+		function()
+			local window = dgsCreateWindow(sW/2-600/2,sH/2-600/2,600,600,"Hello DGS",false)
+
+			dgsSetViewerTarget(false)
+		end
+	)
+
+	showCursor(true)
+end
+createViewer()
+
 ------------Full demo
 function createFullDemo()
 	loadstring(dgsImportOOPClass(true))()

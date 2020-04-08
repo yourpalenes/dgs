@@ -3,6 +3,14 @@ function dgsCreateWindow(x,y,sx,sy,text,relative,textColor,titleHeight,titleImag
 	assert(tonumber(y),"Bad argument @dgsCreateWindow at argument 2, expect number got "..type(y))
 	assert(tonumber(sx),"Bad argument @dgsCreateWindow at argument 3, expect number got "..type(sx))
 	assert(tonumber(sy),"Bad argument @dgsCreateWindow at argument 4, expect number got "..type(sy))
+	if viewerPush and viewer then
+		if not lastWindowID then
+			lastWindowID = 0
+		end
+		lastWindowID = lastWindowID + 1
+		executeBrowserJavascript(viewer, "dgsCreateWindow("..lastWindowID..", "..x..", "..y..", "..sx..", "..sy..", '"..(text or "").."');")
+		return lastWindowID
+	end
 	local window = createElement("dgs-dxwindow")
 	table.insert(CenterFatherTable,window)
 	dgsSetType(window,"dgs-dxwindow")

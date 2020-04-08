@@ -43,6 +43,7 @@ local _getElementID = getElementID
 local getElementID = function(ele) return isElement(ele) and _getElementID(ele) or tostring(ele) end
 ----
 sW,sH = guiGetScreenSize()
+viewerPush = false
 white = 0xFFFFFFFF
 black = 0xFF000000
 green = 0xFF00FF00

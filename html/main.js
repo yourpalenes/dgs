@@ -34,15 +34,13 @@ const Button = {
     var y = y + "px";
     var w = w + "px";
     var h = h + "px";
+    var importer = "dgs";
     if (parent) {
-      document.getElementById(`${parent}`).innerHTML += `
-        <a href="#" class="btn" style="margin-left: ${x}; margin-top: ${y}; line-height: ${h}; width: ${w}; height: ${h};">${title}</a>
-      `;
-    } else {
-      document.getElementById(`dgs`).innerHTML += `
-        <a href="#" class="btn" style="margin-left: ${x}; margin-top: ${y}; line-height: ${h}; width: ${w}; height: ${h};">${title}</a>
-      `;
+      importer = `${parent}`;
     }
+    document.getElementById(importer).innerHTML += `
+      <a href="#" class="btn" style="margin-left: ${x}; margin-top: ${y}; line-height: ${h}; width: ${w}; height: ${h};"><p>${title}</p></a>
+    `;
     return id;
   }
 }
@@ -87,10 +85,18 @@ const Memo = {
   }
 }
 
-const win = Window.create(1, 100, 250, 500, 500, "Hello DGS");
-const btn = Button.create(1, 5, 25, 150, 40, "Test Button", win);
-const btn2 = Button.create(2, 165, 25, 150, 40, "Test Button", win);
-const edit = Edit.create(1, 5, 75, 200, 30, {placeholder: "Username", value: ""}, win);
-const memo = Memo.create(1, 5, 115, 400, 90, {placeholder: "Textarea", value: ""}, win);
+function dgsCreateWindow(id, x, y, w, h, text) {
+  return Window.create(id, x, y, w, h, text);
+}
+
+window.addEventListener('DOMContentLoaded', (event) => {
+    mta.triggerEvent("dgsViewerDomLoad");
+});
+
+//const win = Window.create(1, 100, 250, 500, 500, "Hello DGS");
+//const btn = Button.create(1, 5, 25, 150, 40, "Test Button", win);
+//const btn2 = Button.create(2, 165, 25, 150, 40, "Test Button", win);
+//const edit = Edit.create(1, 5, 75, 200, 30, {placeholder: "Username", value: ""}, win);
+//const memo = Memo.create(1, 5, 115, 400, 90, {placeholder: "Textarea", value: ""}, win);
 
 //Window.set(win, "rounded", 5);
