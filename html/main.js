@@ -21,7 +21,9 @@ const Window = {
 
   set : function(id, key, value) {
     if (key == "rounded") {
-      document.getElementById(`window-${id}`).style += `border-radius: ${value}px;`;
+      document.getElementById(`window-${id}`).style.borderRadius = value;
+    } else if (key == "alpha") {
+      document.getElementById(`window-${id}`).style.opacity = value;
     }
   }
 }
@@ -53,8 +55,8 @@ const Edit = {
     var y = y + "px";
     var w = w + "px";
     var h = h + "px";
-    var value = val.value;
-    var placeholder = val.placeholder;
+    var value = val;
+    var placeholder = val;
     if (parent) {
       document.getElementById(`${parent}`).innerHTML += `
         <input value="${value}" placeholder="${placeholder}" class="edit" style="margin-left: ${x}; margin-top: ${y}; width: ${w}; height: ${h};">
@@ -91,6 +93,14 @@ function dgsCreateWindow(id, x, y, w, h, text) {
 
 function dgsCreateButton(id, x, y, w, h, text, parent) {
   return Button.create(id, x, y, w, h, text, parent);
+}
+
+function dgsCreateEdit(id, x, y, w, h, text, parent) {
+  return Edit.create(id, x, y, w, h, text, parent);
+}
+
+function dgsSetProperty(id, key, value) {
+  return Window.set(id, key, value);
 }
 
 window.addEventListener('DOMContentLoaded', (event) => {

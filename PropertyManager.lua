@@ -271,6 +271,10 @@ function checkCompatibility(dxgui,key)
 end
 
 function dgsSetProperty(dxgui,key,value,...)
+	if viewerPush and viewer then
+		executeBrowserJavascript(viewer, "dgsSetProperty('"..dxgui.."', '"..key.."', '"..value.."');")
+		return
+	end
 	local isTable = type(dxgui) == "table"
 	assert(dgsIsDxElement(dxgui) or isTable,"Bad argument @dgsSetProperty at argument 1, expect a dgs-dxgui element/table got "..dgsGetType(dxgui))
 	if isTable then

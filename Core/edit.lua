@@ -32,6 +32,15 @@ function dgsCreateEdit(x,y,sx,sy,text,relative,parent,textColor,scalex,scaley,bg
 	assert(type(y) == "number","Bad argument @dgsCreateEdit at argument 2, expect number, got "..type(y))
 	assert(type(sx) == "number","Bad argument @dgsCreateEdit at argument 3, expect number, got "..type(sx))
 	assert(type(sy) == "number","Bad argument @dgsCreateEdit at argument 4, expect number, got "..type(sy))
+
+	if viewerPush and viewer then
+		if not lastEditID then
+			lastEditID = 0
+		end
+		lastEditID = lastEditID + 1
+		executeBrowserJavascript(viewer, "dgsCreateEdit("..lastEditID..", "..x..", "..y..", "..sx..", "..sy..", '"..(text).."', '"..parent.."');")
+		return lastEditID
+	end
 	text = tostring(text)
 	if isElement(parent) then
 		assert(dgsIsDxElement(parent),"@dgsCreateEdit argument 7,expect dgs-dxgui, got "..dgsGetType(parent))

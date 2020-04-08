@@ -21,7 +21,7 @@ body {
   border: 0;
   box-shadow: 0 0.50rem 1rem rgba(48,55,66,.15);
   font-family: Roboto;
-  border-radius: 5px;
+  user-select: none;
 }
 
 .dgsWindow .title {
