@@ -33,9 +33,10 @@ body {
   padding-bottom: 0;
 }
 
-.dgsWindow .body .btn {
+.btn {
+  position: absolute;
   display: inline-block;
-  padding: 15px 30px;
+  padding: auto;
   font-size: 15px;
   text-align: center;
   background: rgba(255,255,255,.075);
@@ -44,9 +45,36 @@ body {
   border-radius: 5px;
   letter-spacing: 1px;
   transition: all .2s;
-  margin-bottom: 5px;
 }
 
-.dgsWindow .body .btn:hover {
+.btn:hover {
   background: #3498db;
+}
+
+.edit {
+  position: absolute;
+  color: #fff;
+  padding-left: 15px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border-radius: 5px;
+  background: rgba(255,255,255,.075);
+  border: 0 solid #000;
+}
+
+.edit[type=text]:focus {
+  border: none;
+}
+
+.textarea {
+  font-family: Roboto;
+  position: absolute;
+  color: #fff;
+  padding-left: 15px;
+  padding-top: 5px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border-radius: 5px;
+  background: rgba(255,255,255,.075);
+  border: 0 solid #000;
 }

@@ -16,7 +16,7 @@ const Window = {
         </div>
       </div>
     `;
-    return id;
+    return `window-${id}-body`;
   },
 
   set : function(id, key, value) {
@@ -35,17 +35,62 @@ const Button = {
     var w = w + "px";
     var h = h + "px";
     if (parent) {
-      document.getElementById(`window-${parent}-body`).innerHTML += `
-        <a href="#" class="btn" style="margin-left: ${x}; margin-top: ${y}; width: ${w}; height: ${h};">${title}</a>
+      document.getElementById(`${parent}`).innerHTML += `
+        <a href="#" class="btn" style="margin-left: ${x}; margin-top: ${y}; line-height: ${h}; width: ${w}; height: ${h};">${title}</a>
       `;
     } else {
-
+      document.getElementById(`dgs`).innerHTML += `
+        <a href="#" class="btn" style="margin-left: ${x}; margin-top: ${y}; line-height: ${h}; width: ${w}; height: ${h};">${title}</a>
+      `;
     }
     return id;
   }
 }
 
+const Edit = {
+  cache : [],
+
+  create : function(id, x, y, w, h, val, parent) {
+    var x = x + "px";
+    var y = y + "px";
+    var w = w + "px";
+    var h = h + "px";
+    var value = val.value;
+    var placeholder = val.placeholder;
+    if (parent) {
+      document.getElementById(`${parent}`).innerHTML += `
+        <input value="${value}" placeholder="${placeholder}" class="edit" style="margin-left: ${x}; margin-top: ${y}; width: ${w}; height: ${h};">
+      `;
+    } else {
+
+    }
+  }
+}
+
+const Memo = {
+  cache : [],
+
+  create : function(id, x, y, w, h, val, parent) {
+    var x = x + "px";
+    var y = y + "px";
+    var w = w + "px";
+    var h = h + "px";
+    var value = val.value;
+    var placeholder = val.placeholder;
+    if (parent) {
+      document.getElementById(`${parent}`).innerHTML += `
+        <textarea class="textarea" style="resize: none; margin-left: ${x}; margin-top: ${y}; width: ${w}; height: ${h};">
+      `;
+    } else {
+
+    }
+  }
+}
+
 const win = Window.create(1, 100, 250, 500, 500, "Hello DGS");
-const btn = Button.create(1, 5, 25, 150, 20, "Test Button", win);
-const btn2 = Button.create(2, 5, 75, 150, 20, "Test Button", win);
+const btn = Button.create(1, 5, 25, 150, 40, "Test Button", win);
+const btn2 = Button.create(2, 165, 25, 150, 40, "Test Button", win);
+const edit = Edit.create(1, 5, 75, 200, 30, {placeholder: "Username", value: ""}, win);
+const memo = Memo.create(1, 5, 115, 400, 90, {placeholder: "Textarea", value: ""}, win);
+
 //Window.set(win, "rounded", 5);
