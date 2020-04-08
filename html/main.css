@@ -50,7 +50,11 @@ body {
 }
 
 .btn:hover {
-  background: #3498db;
+  background: rgba(52, 152, 219, .9);
+}
+
+.btn:active {
+  background: rgba(52, 152, 219);
 }
 
 .edit {

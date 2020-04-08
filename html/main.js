@@ -7,8 +7,8 @@ const Window = {
     var w = w + "px";
     var h = h + "px";
     document.getElementById("dgs").innerHTML += `
-      <div class="dgsWindow" id="window-${id}" style="margin-left: ${x}; margin-top: ${y}; width: ${w}; height: ${h}; min-width: ${w}; min-height: ${h}; max-width: ${w}; max-height: ${h};">
-        <div class="title">
+      <div draggable="true" class="dgsWindow" id="window-${id}" style="margin-left: ${x}; margin-top: ${y}; width: ${w}; height: ${h}; min-width: ${w}; min-height: ${h}; max-width: ${w}; max-height: ${h};">
+        <div class="title" id="window-${id}title">
           ${title}
         </div>
         <div class="body" id="window-${id}-body">
@@ -16,6 +16,7 @@ const Window = {
         </div>
       </div>
     `;
+    dragElement(document.getElementById(`window-${id}`));
     return `window-${id}-body`;
   },
 
@@ -101,6 +102,40 @@ function dgsCreateEdit(id, x, y, w, h, text, parent) {
 
 function dgsSetProperty(id, key, value) {
   return Window.set(id, key, value);
+}
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "title")) {
+    document.getElementById(elmnt.id + "title").onmousedown = dragMouseDown;
+  } else {
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    elmnt.style.marginTop = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.marginLeft = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
 }
 
 window.addEventListener('DOMContentLoaded', (event) => {
