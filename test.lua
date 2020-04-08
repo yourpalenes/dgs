@@ -19,8 +19,9 @@ end
 function createViewer()
 	dgsSetViewerTarget(true,
 		function()
-			local window = dgsCreateWindow(sW/2-600/2,sH/2-600/2,600,600,"Hello DGS",false)
-
+			local window, parent = dgsCreateWindow(sW/2-600/2,sH/2-600/2,600,600,"Hello DGS",false)
+		
+			local button = dgsCreateButton(25, 25, 250, 35, "Test Button", false, parent)
 			dgsSetViewerTarget(false)
 		end
 	)

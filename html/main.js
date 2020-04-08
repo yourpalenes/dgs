@@ -89,6 +89,10 @@ function dgsCreateWindow(id, x, y, w, h, text) {
   return Window.create(id, x, y, w, h, text);
 }
 
+function dgsCreateButton(id, x, y, w, h, text, parent) {
+  return Button.create(id, x, y, w, h, text, parent);
+}
+
 window.addEventListener('DOMContentLoaded', (event) => {
     mta.triggerEvent("dgsViewerDomLoad");
 });

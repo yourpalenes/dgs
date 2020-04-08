@@ -9,7 +9,7 @@ function dgsCreateWindow(x,y,sx,sy,text,relative,textColor,titleHeight,titleImag
 		end
 		lastWindowID = lastWindowID + 1
 		executeBrowserJavascript(viewer, "dgsCreateWindow("..lastWindowID..", "..x..", "..y..", "..sx..", "..sy..", '"..(text or "").."');")
-		return lastWindowID
+		return lastWindowID, "window-"..lastWindowID.."-body"
 	end
 	local window = createElement("dgs-dxwindow")
 	table.insert(CenterFatherTable,window)

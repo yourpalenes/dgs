@@ -3,6 +3,14 @@ function dgsCreateButton(x,y,sx,sy,text,relative,parent,textColor,scalex,scaley,
 	assert(tonumber(y),"Bad argument @dgsCreateButton at argument 2, expect number got "..type(y))
 	assert(tonumber(sx),"Bad argument @dgsCreateButton at argument 3, expect number got "..type(sx))
 	assert(tonumber(sy),"Bad argument @dgsCreateButton at argument 4, expect number got "..type(sy))
+	if viewerPush and viewer then
+		if not lastButtonID then
+			lastButtonID = 0
+		end
+		lastButtonID = lastButtonID + 1
+		executeBrowserJavascript(viewer, "dgsCreateButton("..lastButtonID..", "..x..", "..y..", "..sx..", "..sy..", '"..(text or "").."', '"..parent.."');")
+		return lastButtonID
+	end
 	if isElement(parent) then
 		assert(dgsIsDxElement(parent),"Bad argument @dgsCreateButton at argument 7, expect dgs-dxgui got "..dgsGetType(parent))
 	end
