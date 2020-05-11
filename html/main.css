@@ -35,6 +35,14 @@ body {
   padding-bottom: 0;
 }
 
+.dgsWindow {
+  resize: both;
+}
+
+.dgsWindow::-webkit-resizer {
+  background-color: red;
+}
+
 .btn {
   position: absolute;
   display: inline-block;
@@ -55,6 +63,10 @@ body {
 
 .btn:active {
   background: rgba(52, 152, 219);
+}
+
+.lbl {
+  font-size: 13px;
 }
 
 .edit {

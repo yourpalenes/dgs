@@ -8,8 +8,8 @@ function dgsCreateButton(x,y,sx,sy,text,relative,parent,textColor,scalex,scaley,
 			lastButtonID = 0
 		end
 		lastButtonID = lastButtonID + 1
-		executeBrowserJavascript(viewer, "dgsCreateButton("..lastButtonID..", "..x..", "..y..", "..sx..", "..sy..", '"..(text or "").."', '"..parent.."');")
-		return lastButtonID
+		executeBrowserJavascript(viewer, "Button.create("..lastButtonID..", "..x..", "..y..", "..sx..", "..sy..", '"..(text or "").."', '"..parent.."');")
+		return "button-"..lastButtonID
 	end
 	if isElement(parent) then
 		assert(dgsIsDxElement(parent),"Bad argument @dgsCreateButton at argument 7, expect dgs-dxgui got "..dgsGetType(parent))

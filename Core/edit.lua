@@ -38,8 +38,8 @@ function dgsCreateEdit(x,y,sx,sy,text,relative,parent,textColor,scalex,scaley,bg
 			lastEditID = 0
 		end
 		lastEditID = lastEditID + 1
-		executeBrowserJavascript(viewer, "dgsCreateEdit("..lastEditID..", "..x..", "..y..", "..sx..", "..sy..", '"..(text).."', '"..parent.."');")
-		return lastEditID
+		executeBrowserJavascript(viewer, "Edit.create("..lastEditID..", "..x..", "..y..", "..sx..", "..sy..", '"..(text).."', '"..parent.."');")
+		return "edit-"..lastEditID
 	end
 	text = tostring(text)
 	if isElement(parent) then

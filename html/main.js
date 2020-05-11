@@ -8,7 +8,7 @@ const Window = {
     var h = h + "px";
     document.getElementById("dgs").innerHTML += `
       <div draggable="true" class="dgsWindow" id="window-${id}" style="margin-left: ${x}; margin-top: ${y}; width: ${w}; height: ${h}; min-width: ${w}; min-height: ${h}; max-width: ${w}; max-height: ${h};">
-        <div class="title" id="window-${id}title">
+        <div class="title" id="window-${id}-title">
           ${title}
         </div>
         <div class="body" id="window-${id}-body">
@@ -16,16 +16,8 @@ const Window = {
         </div>
       </div>
     `;
-    dragElement(document.getElementById(`window-${id}`));
+    //dragElement(document.getElementById(`window-${id}`));
     return `window-${id}-body`;
-  },
-
-  set : function(id, key, value) {
-    if (key == "rounded") {
-      document.getElementById(`window-${id}`).style.borderRadius = value;
-    } else if (key == "alpha") {
-      document.getElementById(`window-${id}`).style.opacity = value;
-    }
   }
 }
 
@@ -42,7 +34,26 @@ const Button = {
       importer = `${parent}`;
     }
     document.getElementById(importer).innerHTML += `
-      <a href="#" class="btn" style="margin-left: ${x}; margin-top: ${y}; line-height: ${h}; width: ${w}; height: ${h};"><p>${title}</p></a>
+      <a href="#" id="button-${id}" class="btn" style="margin-left: ${x}; margin-top: ${y}; line-height: ${h}; width: ${w}; height: ${h};"><p>${title}</p></a>
+    `;
+    return id;
+  }
+}
+
+const Label = {
+  cache : [],
+
+  create : function(id, x, y, w, h, title, parent) {
+    var x = x + "px";
+    var y = y + "px";
+    var w = w + "px";
+    var h = h + "px";
+    var importer = "dgs";
+    if (parent) {
+      importer = `${parent}`;
+    }
+    document.getElementById(importer).innerHTML += `
+      <p class="lbl" id="label-${id}" style="margin-left: ${x}; margin-top: ${y}; line-height: ${h}; width: ${w}; height: ${h};">${title}</p>
     `;
     return id;
   }
@@ -88,26 +99,22 @@ const Memo = {
   }
 }
 
-function dgsCreateWindow(id, x, y, w, h, text) {
-  return Window.create(id, x, y, w, h, text);
-}
-
-function dgsCreateButton(id, x, y, w, h, text, parent) {
-  return Button.create(id, x, y, w, h, text, parent);
-}
-
-function dgsCreateEdit(id, x, y, w, h, text, parent) {
-  return Edit.create(id, x, y, w, h, text, parent);
-}
-
 function dgsSetProperty(id, key, value) {
-  return Window.set(id, key, value);
+  document.getElementById(id).style.key = value;
+}
+
+function dgsDragElement(id, bool) {
+  if (bool == 1) {
+    dragElement(document.getElementById(id));
+  } else {
+    closeDragElement(document.getElementById(id));
+  }
 }
 
 function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  if (document.getElementById(elmnt.id + "title")) {
-    document.getElementById(elmnt.id + "title").onmousedown = dragMouseDown;
+  if (document.getElementById(elmnt.id + "-title")) {
+    document.getElementById(elmnt.id + "-title").onmousedown = dragMouseDown;
   } else {
     elmnt.onmousedown = dragMouseDown;
   }
@@ -141,11 +148,3 @@ function dragElement(elmnt) {
 window.addEventListener('DOMContentLoaded', (event) => {
     mta.triggerEvent("dgsViewerDomLoad");
 });
-
-//const win = Window.create(1, 100, 250, 500, 500, "Hello DGS");
-//const btn = Button.create(1, 5, 25, 150, 40, "Test Button", win);
-//const btn2 = Button.create(2, 165, 25, 150, 40, "Test Button", win);
-//const edit = Edit.create(1, 5, 75, 200, 30, {placeholder: "Username", value: ""}, win);
-//const memo = Memo.create(1, 5, 115, 400, 90, {placeholder: "Textarea", value: ""}, win);
-
-//Window.set(win, "rounded", 5);

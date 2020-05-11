@@ -19,13 +19,17 @@ end
 function createViewer()
 	dgsSetViewerTarget(true,
 		function()
-			local wid, window = dgsCreateWindow(sW/2-600/2,sH/2-600/2,600,600,"Hello DGS",false)
-			dgsSetProperty(wid, "alpha", ".99")
-			dgsSetProperty(wid, "rounded", "5px")
-			local bid, button = dgsCreateButton(25, 25, 250, 35, "Test Button", false, window)
-			local bid, button = dgsCreateButton(295, 25, 250, 35, "Test Button", false, window)
+			local body, header, all = dgsCreateWindow(sW/2-600/2,sH/2-600/2,600,600,"Hello DGS",false)
+			dgsSetProperty(all, "alpha", ".99;")
+			dgsSetProperty(all, "border-radius", "5px;")
+			dgsWindowSetMovable(all, true)
+			local button = dgsCreateButton(25, 25, 250, 35, "Test Button", false, body)
+			local button = dgsCreateButton(295, 25, 250, 35, "Test Button", false, body)
 
-			local eid, edit = dgsCreateEdit(25, 95, 250, 35, "Test Edit", false, window)
+			dgsSetProperty(button, "alpha", ".25;")
+			local edit = dgsCreateEdit(25, 95, 250, 35, "Test Edit", false, body)
+
+			local label = dgsCreateLabel(25, 140, 220, 20, "Test Label", false, body)
 			dgsSetViewerTarget(false)
 		end
 	)

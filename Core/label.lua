@@ -3,6 +3,14 @@ function dgsCreateLabel(x,y,sx,sy,text,relative,parent,textColor,scalex,scaley,s
 	assert(tonumber(y),"Bad argument @dgsCreateLabel at argument 2, expect number got "..type(y))
 	assert(tonumber(sx),"Bad argument @dgsCreateLabel at argument 3, expect number got "..type(sx))
 	assert(tonumber(sy),"Bad argument @dgsCreateLabel at argument 4, expect number got "..type(sy))
+	if viewerPush and viewer then
+		if not lastLabelID then
+			lastLabelID = 0
+		end
+		lastLabelID = lastLabelID + 1
+		executeBrowserJavascript(viewer, "Label.create("..lastLabelID..", "..x..", "..y..", "..sx..", "..sy..", '"..(text or "").."', '"..parent.."');")
+		return "label-"..lastLabelID
+	end
 	if isElement(parent) then
 		assert(dgsIsDxElement(parent),"Bad argument @dgsCreateLabel at argument 7, expect dgs-dxgui got "..dgsGetType(parent))
 	end

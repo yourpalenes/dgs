@@ -8,8 +8,8 @@ function dgsCreateWindow(x,y,sx,sy,text,relative,textColor,titleHeight,titleImag
 			lastWindowID = 0
 		end
 		lastWindowID = lastWindowID + 1
-		executeBrowserJavascript(viewer, "dgsCreateWindow("..lastWindowID..", "..x..", "..y..", "..sx..", "..sy..", '"..(text or "").."');")
-		return lastWindowID, "window-"..lastWindowID.."-body"
+		executeBrowserJavascript(viewer, "Window.create("..lastWindowID..", "..x..", "..y..", "..sx..", "..sy..", '"..(text or "").."');")
+		return "window-"..lastWindowID.."-body", "window-"..lastWindowID.."-title", "window-"..lastWindowID
 	end
 	local window = createElement("dgs-dxwindow")
 	table.insert(CenterFatherTable,window)
@@ -116,6 +116,10 @@ function dgsWindowGetCloseButton(window)
 end
 
 function dgsWindowSetMovable(window,bool)
+	if viewerPush and viewer then
+		executeBrowserJavascript(viewer, "dgsDragElement('"..window:gsub("-body", "").."', "..(bool and 1 or 0)..");")
+		return
+	end
 	assert(dgsGetType(window) == "dgs-dxwindow","Bad argument @dgsWindowSetMovable at at argument 1, expect dgs-dxwindow got "..dgsGetType(window))
 	return dgsSetData(window,"movable",bool and true or false)
 end
